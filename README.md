@@ -7,4 +7,4 @@ Features:
 + MediaPipe Integration: Utilizes MediaPipe's powerful hand tracking solution.
 + OpenCV Integration: Leverages OpenCV for video processing and display.
 -------------------------------------------------------------------------------
-You can see more detail on demo.
+You can see more detail on demo.webm video
