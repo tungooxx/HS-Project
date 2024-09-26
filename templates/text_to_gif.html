@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to GIF Conversion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+            max-width: 100%;
+        }
+        #gif-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Text to GIF Conversion</h1>
+        <form method="post" id="text-to-gif-form">
+            <input type="text" name="text" placeholder="Enter text here" required>
+            <button type="submit" name="translate_gif" class="button">Translate Now!</button>
+        </form>
+        <div id="gif-container">
+            {% if gif_filename %}
+                <button id="show-gif" class="button" onclick="toggleGif()">Show</button>
+                <div id="gif-display" style="display: none;">
+                    <img src="{{ url_for('static', filename=gif_filename) }}" alt="Generated GIF" width="250" />
+                </div>
+            {% endif %}
+        </div>
+        <form method="post">
+            <button type="submit" name="back_to_main" class="button">Back to Main</button>
+        </form>
+        <button id="swap-button" class="button">Swap to Webcam</button>
+    </div>
+    
+    <script>
+    function toggleGif() {
+        var gifDisplay = document.getElementById('gif-display');
+        // Toggle the display of the GIF
+        if (gifDisplay.style.display === "none") {
+            gifDisplay.style.display = "block"; // Show the GIF
+            document.getElementById('show-gif').innerText = "Hide"; // Change button text to "Hide"
+        } else {
+            gifDisplay.style.display = "none"; // Hide the GIF
+            document.getElementById('show-gif').innerText = "Show"; // Change button text back to "Show"
+        }
+    }
+    </script>
+    
+</body> 
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam Sign Language Recognition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        #video-container {
+            margin-bottom: 20px;
+        }
+        #action-container {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Webcam Sign Language Recognition</h1>
+        <div id="video-container">
+            <img src="{{ url_for('video_feed') }}" width="640" height="480">
+        </div>
+        <div id="action-container"></div>
+        <form method="post">
+            <button type="submit" name="back_to_main" class="button">Back to Main</button>
+        </form>
+        <button id="swap-button" class="button">Swap to Text-to-GIF</button>
+    </div>
+
+    <script>
+        function updateAction() {
+            fetch('/get_action')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('action-container').innerText = data.action.join(' ');
+                });
+        }
+
+        setInterval(updateAction, 1000);
+
+        document.getElementById('swap-button').addEventListener('click', function() {
+            window.location.href = '/text_to_gif';
+        });
+    </script>
+</body>
+</html>
