@@ -113,10 +113,5 @@ Contributions to improve the project are welcome. Please follow these steps:
 4. Push to the branch.
 5. Create a new Pull Request.
 
-## License
-
-[Specify your license here]
-
----
 
 For any issues or suggestions, please open an issue in the GitHub repository.
